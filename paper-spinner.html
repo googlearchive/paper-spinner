@@ -9,6 +9,19 @@
 -->
 <link rel="import" href="../polymer/polymer.html">
 
+<!--
+Element providing material design circular spinner.
+
+##### Example
+
+    <paper-spinner id="spinner" active></paper-spinner>
+
+@element paper-spinner
+@blurb Element providing material design circular spinner.
+@status alpha
+@homepage http://polymerlabs.github.io/paper-spinner
+-->
+
 <polymer-element name="paper-spinner">
 
   <template>
@@ -26,6 +39,13 @@
         'webkitAnimationEnd': 'reset'
       },
       publish: {
+        /**
+         * Displays the spinner.
+         *
+         * @attribute active
+         * @type boolean
+         * @default false
+         */
         active: {value: false, reflect: true}
       },
       activeChanged: function() {
