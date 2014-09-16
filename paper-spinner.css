@@ -50,14 +50,14 @@
   to {transform: rotate(360deg);}
 }
 #container.active {
-  animation-name: rotate;
-  animation-duration: 1568.63ms; /* 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
   -webkit-animation-name: rotate;
   -webkit-animation-duration: 1568.63ms; /* 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
+  animation-name: rotate;
+  animation-duration: 1568.63ms; /* 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @-webkit-keyframes disappear {
@@ -193,24 +193,25 @@
 }
 
 #animation.active {
-  animation-name: fillunfill, rot, colors, shrink;
-  animation-duration: 1333ms, 5332ms, 5332ms, 400ms; /* ARCTIME, 4*ARCTIME, 4*ARCTIME, SHRINK_TIME */
-  animation-iteration-count: infinite, infinite, infinite, 1;
-  animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1), steps(4), linear, cubic-bezier(0.4, 0.0, 0.2, 1);
-  animation-play-state: running, running, running, paused;
-  animation-fill-mode: forwards;
   -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
   -webkit-animation-name: fillunfill, rot, colors, shrink; 
   -webkit-animation-duration: 1333ms, 5332ms, 5332ms, 400ms; /* ARCTIME, 4*ARCTIME, 4*ARCTIME, SHRINK_TIME */
   -webkit-animation-iteration-count: infinite, infinite, infinite, 1;
   -webkit-animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1), steps(4), linear, cubic-bezier(0.4, 0.0, 0.2, 1);
   -webkit-animation-play-state: running, running, running, paused;
   -webkit-animation-fill-mode: forwards;
+  animation-name: fillunfill, rot, colors, shrink;
+  animation-duration: 1333ms, 5332ms, 5332ms, 400ms; /* ARCTIME, 4*ARCTIME, 4*ARCTIME, SHRINK_TIME */
+  animation-iteration-count: infinite, infinite, infinite, 1;
+  animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1), steps(4), linear, cubic-bezier(0.4, 0.0, 0.2, 1);
+  animation-play-state: running, running, running, paused;
+  animation-fill-mode: forwards;
 }
 
 #animation.warmdown {
-  animation-play-state: running, running, running, running;
   -webkit-animation-play-state: running, running, running, running;
+  animation-play-state: running, running, running, running;
 }
 
 #animation {
