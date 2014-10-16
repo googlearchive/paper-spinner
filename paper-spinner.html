@@ -8,6 +8,8 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../core-animation/core-animation.html">
+<link rel="import" href="../core-animation/core-animation-group.html">
 
 <!--
 Element providing material design circular spinner.
@@ -25,19 +27,108 @@ Element providing material design circular spinner.
 <polymer-element name="paper-spinner">
 
   <template>
+
+    <core-animation-group id="spinAnimation">
+      <!-- duration = 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) -->
+      <core-animation target="{{$.container}}" duration="1568.63" iterations="Infinity" easing="linear">
+        <core-animation-keyframe>
+          <core-animation-prop name="transform" value="rotate(0deg)">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="transform" value="rotate(360deg)">
+          </core-animation-prop>
+        </core-animation-keyframe>
+      </core-animation>
+
+      <!-- duration = ARCTIME -->
+      <core-animation target="{{$.spinner}}" duration="1333" iterations="Infinity" easing="cubic-bezier(0.4, 0.0, 0.2, 1)">
+        <core-animation-keyframe>
+          <!-- value = 2*RADIUS*PI * ARCSIZE/360 * 3 - STROKEWIDTH/2 -->
+          <core-animation-prop name="strokeDashoffset" value="175.13">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <!-- value = 2*RADIUS*PI * ARCSIZE/360 * 2 -->
+          <core-animation-prop name="strokeDashoffset" value="117.75">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <!-- value = 2*RADIUS*PI * ARCSIZE/360 + STROKEWIDTH/2 -->
+          <core-animation-prop name="strokeDashoffset" value="60.38">
+          </core-animation-prop>
+        </core-animation-keyframe>
+      </core-animation>
+
+      <!-- duration = 4*ARCTIME -->
+      <core-animation id="rotateSpinnerAnimation" target="{{$.spinner}}" duration="5332" iterations="Infinity" easing="steps(4, end)">
+        <!-- Effect programatically set below - IE does not support CSS transforms on
+          SVG elements, so we use SVG transforms instead. -->
+      </core-animation>
+
+      <!-- duration = 4*ARCTIME -->
+      <core-animation target="{{$.spinner}}" duration="5332" iterations="Infinity" easing="linear">
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0" value="#4285f4">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.18" value="#4285f4">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.25" value="#db4437">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.43" value="#db4437">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.5" value="#f4b400">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.68" value="#f4b400">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.75" value="#0f9d58">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="0.93" value="#0f9d58">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="stroke" offset="1" value="#4285f4">
+          </core-animation-prop>
+        </core-animation-keyframe>
+      </core-animation>
+    </core-animation-group>
+
+    <!-- duration = SHRINK_TIME -->
+    <core-animation id="shrinkAnimation" target="{{$.spinner}}" duration="400" iterations="1" easing="cubic-bezier(0.4, 0.0, 0.2, 1)" fill="forwards" on-core-animation-finish="{{reset}}">
+      <core-animation-keyframe>
+        <core-animation-prop name="strokeWidth" value="3">
+        </core-animation-prop>
+      </core-animation-keyframe>
+      <core-animation-keyframe>
+        <core-animation-prop name="strokeWidth" value="0">
+        </core-animation-prop>
+      </core-animation-keyframe>
+    </core-animation>
+
     <span id="container">
       <link rel="stylesheet" href="paper-spinner.css">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" height="28" width="28">
-        <path id="animation" fill="none" d="M 14,1.5 A 12.5,12.5 0 1 1 1.5,14" stroke-width="3" stroke-linecap="round"/>
+        <path id="spinner" fill="none" d="M 14,1.5 A 12.5,12.5 0 1 1 1.5,14" stroke-width="3" stroke-linecap="round"/>
       </svg>
-    </template>
-  </span>
+    </span>
+  </template>
+
   <script>
     Polymer({
-      eventDelegates: {
-        'animationend': 'reset',
-        'webkitAnimationEnd': 'reset'
-      },
       publish: {
         /**
          * Displays the spinner.
@@ -48,17 +139,35 @@ Element providing material design circular spinner.
          */
         active: {value: false, reflect: true}
       },
+
+      ready: function() {
+        // HACK: "Polyfill" classList on the spinner SVG element (for IE).
+        if (!this.$.spinner.classList) {
+          this.$.spinner.classList = {
+            add: function() {/* noop */},
+            remove: function() {/* noop */}
+          };
+        }
+        this.$.rotateSpinnerAnimation.customEffect = this.rotateSpinnerEffect;
+      },
+
+      rotateSpinnerEffect: function(timeFraction, target, animation) {
+        // IE does not support CSS transforms on SVG elements, so we use SVG transforms instead.
+        target.setAttribute('transform',
+          'translate(14, 14) rotate(-' + (timeFraction * 360) + ') translate(-14, -14)');
+      },
+
       activeChanged: function() {
         if (this.active) {
-          this.$.container.classList.add('active');
-          this.$.animation.classList.add('active');
+          this.$.spinAnimation.play();
         } else {
-          this.$.animation.classList.add('warmdown');
+          this.$.shrinkAnimation.play();
         }
       },
+
       reset: function() {
-        this.$.container.classList.remove('active');
-        this.$.animation.classList.remove('active', 'warmdown');
+        this.$.spinAnimation.cancel();
+        this.$.shrinkAnimation.cancel();
       }
     });
   </script>

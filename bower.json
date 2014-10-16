@@ -2,6 +2,7 @@
   "name": "paper-spinner",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#master"
+    "polymer": "Polymer/polymer#master",
+    "core-animation": "Polymer/core-animation#master"
   }
 }
