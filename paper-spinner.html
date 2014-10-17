@@ -61,9 +61,7 @@ Element providing material design circular spinner.
       </core-animation>
 
       <!-- duration = 4*ARCTIME -->
-      <core-animation id="rotateSpinnerAnimation" target="{{$.spinner}}" duration="5332" iterations="Infinity" easing="steps(4, end)">
-        <!-- Effect programatically set below - IE does not support CSS transforms on
-          SVG elements, so we use SVG transforms instead. -->
+      <core-animation id="rotateSpinnerAnimation" target="{{$.spinner}}" duration="5332" iterations="Infinity" easing="steps(4, end)" customEffect="{{rotateSpinnerEffect}}">
       </core-animation>
 
       <!-- duration = 4*ARCTIME -->
@@ -148,7 +146,6 @@ Element providing material design circular spinner.
             remove: function() {/* noop */}
           };
         }
-        this.$.rotateSpinnerAnimation.customEffect = this.rotateSpinnerEffect;
       },
 
       rotateSpinnerEffect: function(timeFraction, target, animation) {
