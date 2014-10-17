@@ -210,5 +210,4 @@
 #animation {
   stroke-dasharray: 58.9;  /* 2*RADIUS*PI * ARCSIZE/360 */
   stroke-dashoffset: 58.9; /* 2*RADIUS*PI * ARCSIZE/360 */
-  transform-origin: 50% 50%;
 }
