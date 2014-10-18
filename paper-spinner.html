@@ -22,15 +22,25 @@ Element providing material design circular spinner.
 @homepage http://polymerlabs.github.io/paper-spinner
 -->
 
-<polymer-element name="paper-spinner">
+<polymer-element name="paper-spinner" attributes="active">
 
   <template>
-    <span id="container">
-      <link rel="stylesheet" href="paper-spinner.css">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" height="28" width="28">
-        <path id="animation" fill="none" d="M 14,1.5 A 12.5,12.5 0 1 1 1.5,14" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </span>
+    <link rel="stylesheet" href="paper-spinner.css">
+
+    <div id="container">
+      <div class="circle-clipper">
+        <div class="circle left blue" fit></div>
+        <div class="circle left red" fit></div>
+        <div class="circle left yellow" fit></div>
+        <div class="circle left green" fit></div>
+      </div>
+      <div class="circle-clipper">
+        <div class="circle right blue" fit></div>
+        <div class="circle right red" fit></div>
+        <div class="circle right yellow" fit></div>
+        <div class="circle right green" fit></div>
+      </div>
+    </div>
   </template>
 
   <script>
@@ -49,17 +59,17 @@ Element providing material design circular spinner.
          */
         active: {value: false, reflect: true}
       },
+
       activeChanged: function() {
         if (this.active) {
           this.$.container.classList.add('active');
-          this.$.animation.classList.add('active');
         } else {
-          this.$.animation.classList.add('warmdown');
+          this.$.container.classList.add('warmdown');
         }
       },
+
       reset: function() {
-        this.$.container.classList.remove('active');
-        this.$.animation.classList.remove('active', 'warmdown');
+        this.$.container.classList.remove('active', 'warmdown');
       }
     });
   </script>

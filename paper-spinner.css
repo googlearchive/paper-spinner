@@ -1,213 +1,243 @@
-/*
-    @license
-    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-    Code distributed by Google as part of the polymer project is also
-    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
- */
-
-/**************************/
-/* STYLES FOR THE SPINNER */
-/**************************/
-
-/*
- * Constants:
- *      RADIUS      = 12.5
- *      STROKEWIDTH = 3
- *      ARCSIZE     = 270 degrees (amount of circle the arc takes up)
- *      ARCTIME     = 1333ms (time it takes to expand and contract arc)
- *      ARCSTARTROT = 216 degrees (how much the start location of the arc
- *                                should rotate each time, 216 gives us a
- *                                5 pointed star shape (it's 360/5 * 2).
- *                                For a 7 pointed star, we might do
- *                                360/7 * 3 = 154.286)
- *      CONTAINERWIDTH = 28
- *      SHRINK_TIME = 400ms
- */
-
 :host {
-  height: 28px; /* CONTAINERWIDTH */
-  width: 28px; /* CONTAINERWIDTH */
   display: inline-block;
+  position: relative;
+  width: 28px;
+  height: 28px;
 }
 
 #container {
-  display: inline-block;
-  height: 28px; /* CONTAINERWIDTH */
-  width: 28px; /* CONTAINERWIDTH */
+  width: 100%;
+  height: 100%;
 }
 
-/* Rotating the whole thing */
+#container.active {
+  -webkit-animation: rotate 833ms linear infinite;
+  animation: rotate 833ms linear infinite;
+}
+
 @-webkit-keyframes rotate {
-  from {-webkit-transform: rotate(0deg);}
-  to {-webkit-transform: rotate(360deg);}
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes rotate {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
-}
-#container.active {
-  -webkit-animation-name: rotate;
-  -webkit-animation-duration: 1568.63ms; /* 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  animation-name: rotate;
-  animation-duration: 1568.63ms; /* 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-
-
-/* Filling and unfilling the arc */
-@-webkit-keyframes fillunfill {
   from {
-    stroke-dashoffset: 175.13; /* 2*RADIUS*PI * ARCSIZE/360 * 3 - STROKEWIDTH/2 */
-  }
-  50% {
-    stroke-dashoffset: 117.75; /* 2*RADIUS*PI * ARCSIZE/360 * 2 */
+    transform: rotate(0deg);
   }
   to {
-    stroke-dashoffset: 60.38; /* 2*RADIUS*PI * ARCSIZE/360 + STROKEWIDTH/2 */
+    transform: rotate(360deg);
   }
 }
 
-@keyframes fillunfill {
+.circle-clipper {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.circle {
+  box-sizing: border-box;
+  width: 200%;
+  height: 100%;
+  border-color: #4285f4;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 50%;
+}
+
+.circle.left {
+  opacity: 0;
+  -webkit-transform: rotate(40deg);
+  transform: rotate(40deg);
+}
+
+.active .circle.left {
+  -webkit-animation: left-spin 5333ms ease-in-out infinite;
+  animation: left-spin 5333ms ease-in-out infinite;
+}
+
+.circle.right {
+  left: -100%;
+  opacity: 0;
+  -webkit-transform: rotate(-130deg);
+  transform: rotate(-130deg);
+}
+
+.active .circle.right {
+  -webkit-animation: right-spin 5333ms ease-in-out infinite;
+  animation: right-spin 5333ms ease-in-out infinite;
+}
+
+.active .circle.blue {
+  border-color: #4285f4;
+}
+
+.active .circle.red {
+  border-color: #db4437;
+  -webkit-animation-delay: 1333ms;
+  animation-delay: 1333ms;
+}
+
+.active .circle.yellow {
+  border-color: #f4b400;
+  -webkit-animation-delay: 2667ms;
+  animation-delay: 2667ms;
+}
+
+.active .circle.green {
+  border-color: #0f9d58;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+}
+
+@-webkit-keyframes left-spin {
   from {
-    stroke-dashoffset: 175.13; /* 2*RADIUS*PI * ARCSIZE/360 * 3 - STROKEWIDTH/2 */
+    opacity: 0;
+    -webkit-transform: rotate(40deg);
   }
-  50% {
-    stroke-dashoffset: 117.75; /* 2*RADIUS*PI * ARCSIZE/360 * 2 */
+  3% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+    -webkit-transform: rotate(-90deg);
+  }
+  25% {
+    opacity: 1;
+    -webkit-transform: rotate(40deg);
+  }
+  28% {
+    opacity: 0;
+  }
+}
+
+@keyframes left-spin {
+  from {
+    opacity: 0;
+    transform: rotate(40deg);
+  }
+  3% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+    transform: rotate(-90deg);
+  }
+  25% {
+    opacity: 1;
+    transform: rotate(40deg);
+  }
+  28% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes right-spin {
+  from {
+    opacity: 0;
+    -webkit-transform: rotate(-130deg);
+  }
+  3% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    -webkit-transform: rotate(-130deg);
+  }
+  28% {
+    opacity: 0;
+  }
+}
+
+@keyframes right-spin {
+  from {
+    opacity: 0;
+    transform: rotate(-130deg);
+  }
+  3% {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    transform: rotate(-130deg);
+  }
+  28% {
+    opacity: 0;
+  }
+}
+
+.warmdown .circle-clipper {
+  -webkit-animation: fade-out 400ms ease-in-out;
+  animation: fade-out 400ms ease-in-out;
+}
+
+
+@-webkit-keyframes fade-out {
+  from {
+    opacity: 1;
   }
   to {
-    stroke-dashoffset: 60.38; /* 2*RADIUS*PI * ARCSIZE/360 + STROKEWIDTH/2 */
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
 /**
- * Since Firefox does not support transform-origin in SVG (see
- * https://bugzilla.mozilla.org/show_bug.cgi?id=923193), we translate
- * the path to the origin, rotate, and translate back instead.
+ * HACK: The following are actually redundant CSS rules (e.g. combines the animation and
+ * animation-delay properties of .circle.red and .circle.left), but are needed to work
+ * around a Safari issue (it recognizes -webkit-animation-delay in .circle.red as
+ * -webkit-animation and overrides the .circle.left -webkit-animation property).
  */
-@-webkit-keyframes rot {
-  from {
-    -webkit-transform: translate(14px, 14px) rotate(0deg) translate(-14px, -14px);
-    /* CONTAINERWIDTH/2, CONTAINERWIDTH/2 */
-  }
-  to {
-    -webkit-transform: translate(14px, 14px) rotate(-360deg) translate(-14px, -14px);
-    /* CONTAINERWIDTH/2, CONTAINERWIDTH/2 */
-  }
+.active .circle.red.left {
+  -webkit-animation: left-spin 5333ms ease-in-out 1333ms infinite;
+  animation: left-spin 5333ms ease-in-out 1333ms infinite;
 }
 
-@keyframes rot {
-  from {
-    transform: translate(14px, 14px) rotate(0deg) translate(-14px, -14px);
-    /* CONTAINERWIDTH/2, CONTAINERWIDTH/2 */
-  }
-  to {
-    transform: translate(14px, 14px) rotate(-360deg) translate(-14px, -14px);
-    /* CONTAINERWIDTH/2, CONTAINERWIDTH/2 */
-  }
+.active .circle.red.right {
+  -webkit-animation: right-spin 5333ms ease-in-out 1333ms infinite;
+  animation: right-spin 5333ms ease-in-out 1333ms infinite;
 }
 
-@-webkit-keyframes colors {
-  0% {
-    stroke: #4285f4;
-  }
-  18% {
-    stroke: #4285f4;
-  }
-  25% {
-    stroke: #db4437;
-  }
-  43% {
-    stroke: #db4437;
-  }
-  50% {
-    stroke: #f4b400;
-  }
-  68% {
-    stroke: #f4b400;
-  }
-  75% {
-    stroke: #0f9d58;
-  }
-  93% {
-    stroke: #0f9d58;
-  }
-  100% {
-    stroke: #4285f4;
-  }
+.active .circle.yellow.left {
+  -webkit-animation: left-spin 5333ms ease-in-out 2667ms infinite;
+  animation: left-spin 5333ms ease-in-out 2667ms infinite;
 }
 
-@keyframes colors {
-  0% {
-    stroke: #4285f4;
-  }
-  18% {
-    stroke: #4285f4;
-  }
-  25% {
-    stroke: #db4437;
-  }
-  43% {
-    stroke: #db4437;
-  }
-  50% {
-    stroke: #f4b400;
-  }
-  68% {
-    stroke: #f4b400;
-  }
-  75% {
-    stroke: #0f9d58;
-  }
-  93% {
-    stroke: #0f9d58;
-  }
-  100% {
-    stroke: #4285f4;
-  }
+.active .circle.yellow.right {
+  -webkit-animation: right-spin 5333ms ease-in-out 2667ms infinite;
+  animation: right-spin 5333ms ease-in-out 2667ms infinite;
 }
 
-@-webkit-keyframes shrink {
-  to {
-    stroke-width:0px;
-  }
+.active .circle.green.left {
+  -webkit-animation: left-spin 5333ms ease-in-out 4s infinite;
+  animation: left-spin 5333ms ease-in-out 4s infinite;
 }
 
-@keyframes shrink {
-  to {
-    stroke-width:0px;
-  }
-}
-
-#animation.active {
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
-  -webkit-animation-name: fillunfill, rot, colors, shrink;
-  -webkit-animation-duration: 1333ms, 5332ms, 5332ms, 400ms; /* ARCTIME, 4*ARCTIME, 4*ARCTIME, SHRINK_TIME */
-  -webkit-animation-iteration-count: infinite, infinite, infinite, 1;
-  -webkit-animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1), steps(4), linear, cubic-bezier(0.4, 0.0, 0.2, 1);
-  -webkit-animation-play-state: running, running, running, paused;
-  -webkit-animation-fill-mode: forwards;
-  animation-name: fillunfill, rot, colors, shrink;
-  animation-duration: 1333ms, 5332ms, 5332ms, 400ms; /* ARCTIME, 4*ARCTIME, 4*ARCTIME, SHRINK_TIME */
-  animation-iteration-count: infinite, infinite, infinite, 1;
-  animation-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1), steps(4), linear, cubic-bezier(0.4, 0.0, 0.2, 1);
-  animation-play-state: running, running, running, paused;
-  animation-fill-mode: forwards;
-}
-
-#animation.warmdown {
-  -webkit-animation-play-state: running, running, running, running;
-  animation-play-state: running, running, running, running;
-}
-
-#animation {
-  stroke-dasharray: 58.9;  /* 2*RADIUS*PI * ARCSIZE/360 */
-  stroke-dashoffset: 58.9; /* 2*RADIUS*PI * ARCSIZE/360 */
+.active .circle.green.right {
+  -webkit-animation: right-spin 5333ms ease-in-out 4s infinite;
+  animation: right-spin 5333ms ease-in-out 4s infinite;
 }
