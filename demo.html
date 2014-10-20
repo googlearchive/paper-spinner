@@ -28,9 +28,11 @@
   }
   </style>
   <template is="auto-binding">
-    <paper-spinner class="big-spinner" active></paper-spinner>
+    <h2>Default Spinner</h2>
     <paper-spinner id="spinner" active></paper-spinner>
     <button on-tap="{{toggle}}">Toggle</button>
+    <h2>Custom Spinner</h2>
+    <paper-spinner class="big-spinner" active></paper-spinner>
   </template>
   <script>
     var t = document.querySelector('template');
