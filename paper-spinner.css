@@ -151,31 +151,32 @@
   border-width: 3px; /* STROKEWIDTH */
   border-style: solid;
   border-radius: 50%;
+  opacity: 0;
+  -webkit-animation: none;
+  animation: none;
 }
 
 .circle.left {
-  opacity: 0;
   -webkit-transform: rotate(40deg);
   transform: rotate(40deg);
 }
 
 .active .circle.left {
   /* duration: 4 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
 .circle.right {
   left: -100%;
-  opacity: 0;
   -webkit-transform: rotate(-130deg);
   transform: rotate(-130deg);
 }
 
 .active .circle.right {
   /* duration: 4 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
 .active .circle.blue {
@@ -321,36 +322,36 @@
  */
 .active .circle.red.left {
   /* duration: 4 * ARCTIME; delay: 1 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite;
+  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
+  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
 }
 
 .active .circle.red.right {
   /* duration: 4 * ARCTIME; delay: 1 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite;
+  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
+  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
 }
 
 .active .circle.yellow.left {
   /* duration: 4 * ARCTIME; delay: 2 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite;
+  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
+  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
 }
 
 .active .circle.yellow.right {
   /* duration: 4 * ARCTIME; delay: 2 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite;
+  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
+  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
 }
 
 .active .circle.green.left {
   /* duration: 4 * ARCTIME; delay: 3 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite;
+  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
+  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
 }
 
 .active .circle.green.right {
   /* duration: 4 * ARCTIME; delay: 3 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite;
+  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
+  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
 }
