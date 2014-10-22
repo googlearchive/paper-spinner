@@ -40,11 +40,11 @@
 
 #container.active {
   /* duration: 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
-  -webkit-animation: rotate 1568ms linear infinite;
-  animation: rotate 1568ms linear infinite;
+  -webkit-animation: container-rotate 1568ms linear infinite;
+  animation: container-rotate 1568ms linear infinite;
 }
 
-@-webkit-keyframes rotate {
+@-webkit-keyframes container-rotate {
   from {
     -webkit-transform: rotate(0deg);
   }
@@ -53,7 +53,7 @@
   }
 }
 
-@keyframes rotate {
+@keyframes container-rotate {
   from {
     transform: rotate(0deg);
   }
@@ -78,25 +78,25 @@
   from {
     -webkit-transform: rotate(0deg); /* 0 * ARCSIZE */
   }
-  12% {
+  12.5% {
     -webkit-transform: rotate(135deg); /* 0.5 * ARCSIZE */
   }
   25% {
     -webkit-transform: rotate(270deg); /* 1 * ARCSIZE */
   }
-  37% {
+  37.5% {
     -webkit-transform: rotate(405deg); /* 1.5 * ARCSIZE */
   }
   50% {
     -webkit-transform: rotate(540deg); /* 2 * ARCSIZE */
   }
-  62% {
+  62.5% {
     -webkit-transform: rotate(675deg); /* 2.5 * ARCSIZE */
   }
   75% {
     -webkit-transform: rotate(810deg); /* 3 * ARCSIZE */
   }
-  87% {
+  87.5% {
     -webkit-transform: rotate(945deg); /* 3.5 * ARCSIZE */
   }
   to {
@@ -108,25 +108,25 @@
   from {
     transform: rotate(0deg); /* 0 * ARCSIZE */
   }
-  12% {
+  12.5% {
     transform: rotate(135deg); /* 0.5 * ARCSIZE */
   }
   25% {
     transform: rotate(270deg); /* 1 * ARCSIZE */
   }
-  37% {
+  37.5% {
     transform: rotate(405deg); /* 1.5 * ARCSIZE */
   }
   50% {
     transform: rotate(540deg); /* 2 * ARCSIZE */
   }
-  62% {
+  62.5% {
     transform: rotate(675deg); /* 2.5 * ARCSIZE */
   }
   75% {
     transform: rotate(810deg); /* 3 * ARCSIZE */
   }
-  87% {
+  87.5% {
     transform: rotate(945deg); /* 3.5 * ARCSIZE */
   }
   to {
@@ -161,22 +161,10 @@
   transform: rotate(40deg);
 }
 
-.active .circle.left {
-  /* duration: 4 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-}
-
 .circle.right {
   left: -100%;
   -webkit-transform: rotate(-130deg);
   transform: rotate(-130deg);
-}
-
-.active .circle.right {
-  /* duration: 4 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
 .active .circle.blue {
@@ -185,105 +173,265 @@
 
 .active .circle.red {
   border-color: #db4437;
-  /* delay: 1 * ARCTIME */
-  -webkit-animation-delay: 1333ms;
-  animation-delay: 1333ms;
 }
 
 .active .circle.yellow {
   border-color: #f4b400;
-  /* delay: 2 * ARCTIME */
-  -webkit-animation-delay: 2666ms;
-  animation-delay: 2666ms;
 }
 
 .active .circle.green {
   border-color: #0f9d58;
-  /* delay: 3 * ARCTIME */
-  -webkit-animation-delay: 3999ms;
-  animation-delay: 3999ms;
+}
+
+/**
+ * IMPORTANT NOTE ABOUT CSS ANIMATION PROPERTIES (keanulee):
+ *
+ * iOS Safari (tested on iOS 8.1) does not handle animation-delay very well - it doesn't
+ * guarantee that the animation will start _exactly_ after that value. So we avoid using
+ * animation-delay and instead set custom keyframes for each color (as redundant as it
+ * seems).
+ *
+ * We write out each animation in full below (instead of animation-name, animation-duration,
+ * etc.) because under the polyfill, Safari does not recognize those specific properties
+ * properly, treats them as -webkit-animation, and overrides the other animation rules.
+ * See https://github.com/Polymer/platform/issues/53.
+ */
+.active .circle.blue.left {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.blue.right {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.red.left {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.red.right {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.yellow.left {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.yellow.right {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.green.left {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle.green.right {
+  /* duration: ARCTIME, 4 * ARCTIME */
+  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
 @-webkit-keyframes left-spin {
   from {
-    opacity: 0;
     -webkit-transform: rotate(40deg);
   }
-  3% {
-    opacity: 1;
-  }
-  12% {
-    opacity: 1;
+  50% {
     -webkit-transform: rotate(-90deg);
   }
-  25% {
-    opacity: 1;
+  to {
     -webkit-transform: rotate(40deg);
-  }
-  28% {
-    opacity: 0;
   }
 }
 
 @keyframes left-spin {
   from {
-    opacity: 0;
     transform: rotate(40deg);
   }
-  3% {
-    opacity: 1;
-  }
-  12% {
-    opacity: 1;
+  50% {
     transform: rotate(-90deg);
   }
-  25% {
-    opacity: 1;
+  to {
     transform: rotate(40deg);
-  }
-  28% {
-    opacity: 0;
   }
 }
 
 @-webkit-keyframes right-spin {
   from {
-    opacity: 0;
     -webkit-transform: rotate(-130deg);
   }
-  3% {
-    opacity: 1;
-  }
-  12% {
-    opacity: 1;
+  50% {
     -webkit-transform: rotate(0deg);
   }
-  25% {
-    opacity: 1;
+  to {
     -webkit-transform: rotate(-130deg);
-  }
-  28% {
-    opacity: 0;
   }
 }
 
 @keyframes right-spin {
   from {
-    opacity: 0;
     transform: rotate(-130deg);
   }
-  3% {
+  50% {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-130deg);
+  }
+}
+
+@-webkit-keyframes blue-fade-in-out {
+  from {
     opacity: 1;
   }
   12% {
     opacity: 1;
-    transform: rotate(0deg);
+  }
+  25% {
+    opacity: 0;
+  }
+  87% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blue-fade-in-out {
+  from {
+    opacity: 1;
+  }
+  12% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  87% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes red-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0;
   }
   25% {
     opacity: 1;
-    transform: rotate(-130deg);
   }
-  28% {
+  37% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes red-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  37% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes yellow-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  37% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+}
+
+@keyframes yellow-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  37% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  62% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes green-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  87% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes green-fade-in-out {
+  from {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 1;
+  }
+  87% {
+    opacity: 1;
+  }
+  100% {
     opacity: 0;
   }
 }
@@ -311,47 +459,4 @@
   to {
     opacity: 0;
   }
-}
-
-/**
- * HACK: The following are actually redundant CSS rules (e.g. combines the animation and
- * animation-delay properties of .circle.red and .circle.left), but are needed to work
- * around a Safari issue (it recognizes -webkit-animation-delay in .circle.red as
- * -webkit-animation and overrides the .circle.left -webkit-animation property).
- * See https://github.com/Polymer/platform/issues/53.
- */
-.active .circle.red.left {
-  /* duration: 4 * ARCTIME; delay: 1 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
-}
-
-.active .circle.red.right {
-  /* duration: 4 * ARCTIME; delay: 1 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 1333ms infinite both;
-}
-
-.active .circle.yellow.left {
-  /* duration: 4 * ARCTIME; delay: 2 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
-}
-
-.active .circle.yellow.right {
-  /* duration: 4 * ARCTIME; delay: 2 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 2666ms infinite both;
-}
-
-.active .circle.green.left {
-  /* duration: 4 * ARCTIME; delay: 3 * ARCTIME */
-  -webkit-animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
-  animation: left-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
-}
-
-.active .circle.green.right {
-  /* duration: 4 * ARCTIME; delay: 3 * ARCTIME */
-  -webkit-animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
-  animation: right-spin 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) 3999ms infinite both;
 }
