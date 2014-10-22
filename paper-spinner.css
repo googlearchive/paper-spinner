@@ -167,19 +167,19 @@
   transform: rotate(-130deg);
 }
 
-.active .circle.blue {
+.circle.blue {
   border-color: #4285f4;
 }
 
-.active .circle.red {
+.circle.red {
   border-color: #db4437;
 }
 
-.active .circle.yellow {
+.circle.yellow {
   border-color: #f4b400;
 }
 
-.active .circle.green {
+.circle.green {
   border-color: #0f9d58;
 }
 
@@ -296,14 +296,17 @@
   from {
     opacity: 1;
   }
-  12% {
+  25% {
     opacity: 1;
   }
-  25% {
+  26% {
     opacity: 0;
   }
-  87% {
+  89% {
     opacity: 0;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
     opacity: 1;
@@ -314,14 +317,17 @@
   from {
     opacity: 1;
   }
-  12% {
+  25% {
     opacity: 1;
   }
-  25% {
+  26% {
     opacity: 0;
   }
-  87% {
+  89% {
     opacity: 0;
+  }
+  90% {
+    opacity: 1;
   }
   100% {
     opacity: 1;
@@ -332,16 +338,16 @@
   from {
     opacity: 0;
   }
-  12% {
+  15% {
     opacity: 0;
   }
   25% {
     opacity: 1;
   }
-  37% {
+  50% {
     opacity: 1;
   }
-  50% {
+  51% {
     opacity: 0;
   }
 }
@@ -350,16 +356,16 @@
   from {
     opacity: 0;
   }
-  12% {
+  15% {
     opacity: 0;
   }
   25% {
     opacity: 1;
   }
-  37% {
+  50% {
     opacity: 1;
   }
-  50% {
+  51% {
     opacity: 0;
   }
 }
@@ -368,16 +374,16 @@
   from {
     opacity: 0;
   }
-  37% {
+  40% {
     opacity: 0;
   }
   50% {
     opacity: 1;
   }
-  62% {
+  75% {
     opacity: 1;
   }
-  75% {
+  76% {
     opacity: 0;
   }
 }
@@ -386,16 +392,16 @@
   from {
     opacity: 0;
   }
-  37% {
+  40% {
     opacity: 0;
   }
   50% {
     opacity: 1;
   }
-  62% {
+  75% {
     opacity: 1;
   }
-  75% {
+  76% {
     opacity: 0;
   }
 }
@@ -404,13 +410,13 @@
   from {
     opacity: 0;
   }
-  62% {
+  65% {
     opacity: 0;
   }
   75% {
     opacity: 1;
   }
-  87% {
+  90% {
     opacity: 1;
   }
   100% {
@@ -422,13 +428,13 @@
   from {
     opacity: 0;
   }
-  62% {
+  65% {
     opacity: 0;
   }
   75% {
     opacity: 1;
   }
-  87% {
+  90% {
     opacity: 1;
   }
   100% {
