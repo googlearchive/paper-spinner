@@ -142,12 +142,25 @@
   overflow: hidden;
 }
 
+.circle-clipper:first-child {
+  -webkit-transform: rotate(1deg);
+  -webkit-transform-origin: right center;
+  transform: rotate(1deg);
+  transform-origin: right center;
+}
+
+.circle-clipper:last-child {
+  -webkit-transform: rotate(-1deg);
+  -webkit-transform-origin: left center;
+  transform: rotate(-1deg);
+  transform-origin: left center;
+}
+
 .circle {
   box-sizing: border-box;
   width: 200%;
   height: 100%;
   border-bottom-color: transparent !important;
-  border-left-color: transparent !important;
   border-width: 3px; /* STROKEWIDTH */
   border-style: solid;
   border-radius: 50%;
@@ -157,14 +170,16 @@
 }
 
 .circle.left {
-  -webkit-transform: rotate(40deg);
-  transform: rotate(40deg);
+  border-right-color: transparent !important;
+  -webkit-transform: rotate(129deg);
+  transform: rotate(129deg);
 }
 
 .circle.right {
   left: -100%;
-  -webkit-transform: rotate(-130deg);
-  transform: rotate(-130deg);
+  border-left-color: transparent !important;
+  -webkit-transform: rotate(-129deg);
+  transform: rotate(-129deg);
 }
 
 .circle.blue {
@@ -246,49 +261,49 @@
 
 @-webkit-keyframes left-spin {
   from {
-    -webkit-transform: rotate(40deg);
+    -webkit-transform: rotate(129deg);
   }
   50% {
-    -webkit-transform: rotate(-90deg);
+    -webkit-transform: rotate(-1deg);
   }
   to {
-    -webkit-transform: rotate(40deg);
+    -webkit-transform: rotate(129deg);
   }
 }
 
 @keyframes left-spin {
   from {
-    transform: rotate(40deg);
+    transform: rotate(129deg);
   }
   50% {
-    transform: rotate(-90deg);
+    transform: rotate(-1deg);
   }
   to {
-    transform: rotate(40deg);
+    transform: rotate(129deg);
   }
 }
 
 @-webkit-keyframes right-spin {
   from {
-    -webkit-transform: rotate(-130deg);
+    -webkit-transform: rotate(-129deg);
   }
   50% {
-    -webkit-transform: rotate(0deg);
+    -webkit-transform: rotate(1deg);
   }
   to {
-    -webkit-transform: rotate(-130deg);
+    -webkit-transform: rotate(-129deg);
   }
 }
 
 @keyframes right-spin {
   from {
-    transform: rotate(-130deg);
+    transform: rotate(-129deg);
   }
   50% {
-    transform: rotate(0deg);
+    transform: rotate(1deg);
   }
   to {
-    transform: rotate(-130deg);
+    transform: rotate(-129deg);
   }
 }
 
