@@ -16,23 +16,9 @@
   <link rel="import" href="paper-spinner.html">
 </head>
 <body>
-  <style shim-shadowdom>
-  paper-spinner.big-spinner {
-    width: 100px;
-    height: 100px;
-  }
-
-  paper-spinner.big-spinner::shadow .circle {
-    border-color: purple;
-    border-width: 20px;
-  }
-  </style>
   <template is="auto-binding">
-    <h2>Default Spinner</h2>
     <paper-spinner id="spinner" active></paper-spinner>
     <button on-tap="{{toggle}}">Toggle</button>
-    <h2>Custom Spinner</h2>
-    <paper-spinner class="big-spinner" active></paper-spinner>
   </template>
   <script>
     var t = document.querySelector('template');
