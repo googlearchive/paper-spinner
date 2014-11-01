@@ -135,25 +135,11 @@
 }
 
 .circle-clipper {
+  display: inline-block;
   position: relative;
-  float: left;
   width: 50%;
   height: 100%;
   overflow: hidden;
-}
-
-.circle-clipper:first-child {
-  -webkit-transform: rotate(1deg);
-  -webkit-transform-origin: right center;
-  transform: rotate(1deg);
-  transform-origin: right center;
-}
-
-.circle-clipper:last-child {
-  -webkit-transform: rotate(-1deg);
-  -webkit-transform-origin: left center;
-  transform: rotate(-1deg);
-  transform-origin: left center;
 }
 
 .circle {
@@ -261,49 +247,49 @@
 
 @-webkit-keyframes left-spin {
   from {
-    -webkit-transform: rotate(129deg);
+    -webkit-transform: rotate(130deg);
   }
   50% {
-    -webkit-transform: rotate(-1deg);
+    -webkit-transform: rotate(-5deg);
   }
   to {
-    -webkit-transform: rotate(129deg);
+    -webkit-transform: rotate(130deg);
   }
 }
 
 @keyframes left-spin {
   from {
-    transform: rotate(129deg);
+    transform: rotate(130deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-5deg);
   }
   to {
-    transform: rotate(129deg);
+    transform: rotate(130deg);
   }
 }
 
 @-webkit-keyframes right-spin {
   from {
-    -webkit-transform: rotate(-129deg);
+    -webkit-transform: rotate(-130deg);
   }
   50% {
-    -webkit-transform: rotate(1deg);
+    -webkit-transform: rotate(5deg);
   }
   to {
-    -webkit-transform: rotate(-129deg);
+    -webkit-transform: rotate(-130deg);
   }
 }
 
 @keyframes right-spin {
   from {
-    transform: rotate(-129deg);
+    transform: rotate(-130deg);
   }
   50% {
-    transform: rotate(1deg);
+    transform: rotate(5deg);
   }
   to {
-    transform: rotate(-129deg);
+    transform: rotate(-130deg);
   }
 }
 
