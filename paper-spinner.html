@@ -14,7 +14,20 @@ Element providing material design circular spinner.
 
 ##### Example
 
-    <paper-spinner id="spinner" active></paper-spinner>
+    <paper-spinner active></paper-spinner>
+
+The default spinner cycles between blue, red, yellow and green. It can be customized so
+that it uses one color only.
+
+##### Example
+
+    <style shim-shadowdom>
+      paper-spinner.blue::shadow .circle {
+        border-color: #4285f4;
+      }
+    </style>
+
+    <paper-spinner class="blue" active></paper-spinner>
 
 @element paper-spinner
 @blurb Element providing material design circular spinner.
