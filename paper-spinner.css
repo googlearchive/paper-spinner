@@ -33,154 +33,45 @@
   height: 28px; /* CONTAINERWIDTH */
 }
 
-#container {
+#spinnerContainer {
   width: 100%;
   height: 100%;
 }
 
-#container.active {
+#spinnerContainer.active {
   /* duration: 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
   -webkit-animation: container-rotate 1568ms linear infinite;
   animation: container-rotate 1568ms linear infinite;
 }
 
 @-webkit-keyframes container-rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+  to { -webkit-transform: rotate(360deg) }
 }
 
 @keyframes container-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg) }
 }
 
-.circle-container {
+.spinner-layer {
+  position: absolute;
   width: 100%;
   height: 100%;
-}
-
-.active .circle-container {
-  /* duration: 4 * ARCTIME */
-  -webkit-animation: circle-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-  animation: circle-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
-
-}
-
-@-webkit-keyframes circle-rotate {
-  from {
-    -webkit-transform: rotate(0deg); /* 0 * ARCSIZE */
-  }
-  12.5% {
-    -webkit-transform: rotate(135deg); /* 0.5 * ARCSIZE */
-  }
-  25% {
-    -webkit-transform: rotate(270deg); /* 1 * ARCSIZE */
-  }
-  37.5% {
-    -webkit-transform: rotate(405deg); /* 1.5 * ARCSIZE */
-  }
-  50% {
-    -webkit-transform: rotate(540deg); /* 2 * ARCSIZE */
-  }
-  62.5% {
-    -webkit-transform: rotate(675deg); /* 2.5 * ARCSIZE */
-  }
-  75% {
-    -webkit-transform: rotate(810deg); /* 3 * ARCSIZE */
-  }
-  87.5% {
-    -webkit-transform: rotate(945deg); /* 3.5 * ARCSIZE */
-  }
-  to {
-    -webkit-transform: rotate(1080deg); /* 4 * ARCSIZE */
-  }
-}
-
-@keyframes circle-rotate {
-  from {
-    transform: rotate(0deg); /* 0 * ARCSIZE */
-  }
-  12.5% {
-    transform: rotate(135deg); /* 0.5 * ARCSIZE */
-  }
-  25% {
-    transform: rotate(270deg); /* 1 * ARCSIZE */
-  }
-  37.5% {
-    transform: rotate(405deg); /* 1.5 * ARCSIZE */
-  }
-  50% {
-    transform: rotate(540deg); /* 2 * ARCSIZE */
-  }
-  62.5% {
-    transform: rotate(675deg); /* 2.5 * ARCSIZE */
-  }
-  75% {
-    transform: rotate(810deg); /* 3 * ARCSIZE */
-  }
-  87.5% {
-    transform: rotate(945deg); /* 3.5 * ARCSIZE */
-  }
-  to {
-    transform: rotate(1080deg); /* 4 * ARCSIZE */
-  }
-}
-
-.circle-clipper {
-  display: inline-block;
-  position: relative;
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.circle {
-  box-sizing: border-box;
-  width: 200%;
-  height: 100%;
-  border-bottom-color: transparent !important;
-  border-width: 3px; /* STROKEWIDTH */
-  border-style: solid;
-  border-radius: 50%;
   opacity: 0;
-  -webkit-animation: none;
-  animation: none;
 }
 
-.circle.left {
-  border-right-color: transparent !important;
-  -webkit-transform: rotate(129deg);
-  transform: rotate(129deg);
-}
-
-.circle.right {
-  left: -100%;
-  border-left-color: transparent !important;
-  -webkit-transform: rotate(-129deg);
-  transform: rotate(-129deg);
-}
-
-.circle.blue {
+.blue {
   border-color: #4285f4;
 }
 
-.circle.red {
+.red {
   border-color: #db4437;
 }
 
-.circle.yellow {
+.yellow {
   border-color: #f4b400;
 }
 
-.circle.green {
+.green {
   border-color: #0f9d58;
 }
 
@@ -192,278 +83,229 @@
  * animation-delay and instead set custom keyframes for each color (as redundant as it
  * seems).
  *
- * We write out each animation in full below (instead of animation-name, animation-duration,
- * etc.) because under the polyfill, Safari does not recognize those specific properties
- * properly, treats them as -webkit-animation, and overrides the other animation rules.
- * See https://github.com/Polymer/platform/issues/53.
+ * We write out each animation in full (instead of separating animation-name,
+ * animation-duration, etc.) because under the polyfill, Safari does not recognize those
+ * specific properties properly, treats them as -webkit-animation, and overrides the
+ * other animation rules. See https://github.com/Polymer/platform/issues/53.
  */
-.active .circle.blue.left {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+.active .spinner-layer.blue {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
-.active .circle.blue.right {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+.active .spinner-layer.red {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
-.active .circle.red.left {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+.active .spinner-layer.yellow {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
-.active .circle.red.right {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+.active .spinner-layer.green {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
 }
 
-.active .circle.yellow.left {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+@-webkit-keyframes fill-unfill-rotate {
+  12.5% { -webkit-transform: rotate(135deg);  } /* 0.5 * ARCSIZE */
+  25%   { -webkit-transform: rotate(270deg);  } /* 1   * ARCSIZE */
+  37.5% { -webkit-transform: rotate(405deg);  } /* 1.5 * ARCSIZE */
+  50%   { -webkit-transform: rotate(540deg);  } /* 2   * ARCSIZE */
+  62.5% { -webkit-transform: rotate(675deg);  } /* 2.5 * ARCSIZE */
+  75%   { -webkit-transform: rotate(810deg);  } /* 3   * ARCSIZE */
+  87.5% { -webkit-transform: rotate(945deg);  } /* 3.5 * ARCSIZE */
+  to    { -webkit-transform: rotate(1080deg); } /* 4   * ARCSIZE */
 }
 
-.active .circle.yellow.right {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-}
-
-.active .circle.green.left {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-}
-
-.active .circle.green.right {
-  /* duration: ARCTIME, 4 * ARCTIME */
-  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-}
-
-@-webkit-keyframes left-spin {
-  from {
-    -webkit-transform: rotate(130deg);
-  }
-  50% {
-    -webkit-transform: rotate(-5deg);
-  }
-  to {
-    -webkit-transform: rotate(130deg);
-  }
-}
-
-@keyframes left-spin {
-  from {
-    transform: rotate(130deg);
-  }
-  50% {
-    transform: rotate(-5deg);
-  }
-  to {
-    transform: rotate(130deg);
-  }
-}
-
-@-webkit-keyframes right-spin {
-  from {
-    -webkit-transform: rotate(-130deg);
-  }
-  50% {
-    -webkit-transform: rotate(5deg);
-  }
-  to {
-    -webkit-transform: rotate(-130deg);
-  }
-}
-
-@keyframes right-spin {
-  from {
-    transform: rotate(-130deg);
-  }
-  50% {
-    transform: rotate(5deg);
-  }
-  to {
-    transform: rotate(-130deg);
-  }
+@keyframes fill-unfill-rotate {
+  12.5% { transform: rotate(135deg);  } /* 0.5 * ARCSIZE */
+  25%   { transform: rotate(270deg);  } /* 1   * ARCSIZE */
+  37.5% { transform: rotate(405deg);  } /* 1.5 * ARCSIZE */
+  50%   { transform: rotate(540deg);  } /* 2   * ARCSIZE */
+  62.5% { transform: rotate(675deg);  } /* 2.5 * ARCSIZE */
+  75%   { transform: rotate(810deg);  } /* 3   * ARCSIZE */
+  87.5% { transform: rotate(945deg);  } /* 3.5 * ARCSIZE */
+  to    { transform: rotate(1080deg); } /* 4   * ARCSIZE */
 }
 
 @-webkit-keyframes blue-fade-in-out {
-  from {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-  }
-  26% {
-    opacity: 0;
-  }
-  89% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
+  from { opacity: 1; }
+  25% { opacity: 1; }
+  26% { opacity: 0; }
+  89% { opacity: 0; }
+  90% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
 @keyframes blue-fade-in-out {
-  from {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-  }
-  26% {
-    opacity: 0;
-  }
-  89% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
+  from { opacity: 1; }
+  25% { opacity: 1; }
+  26% { opacity: 0; }
+  89% { opacity: 0; }
+  90% { opacity: 1; }
+  100% { opacity: 1; }
 }
 
 @-webkit-keyframes red-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  15% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  51% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  15% { opacity: 0; }
+  25% { opacity: 1; }
+  50% { opacity: 1; }
+  51% { opacity: 0; }
 }
 
 @keyframes red-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  15% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  51% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  15% { opacity: 0; }
+  25% { opacity: 1; }
+  50% { opacity: 1; }
+  51% { opacity: 0; }
 }
 
 @-webkit-keyframes yellow-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  76% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  40% { opacity: 0; }
+  50% { opacity: 1; }
+  75% { opacity: 1; }
+  76% { opacity: 0; }
 }
 
 @keyframes yellow-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  76% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  40% { opacity: 0; }
+  50% { opacity: 1; }
+  75% { opacity: 1; }
+  76% { opacity: 0; }
 }
 
 @-webkit-keyframes green-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  65% { opacity: 0; }
+  75% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes green-fade-in-out {
-  from {
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+  from { opacity: 0; }
+  65% { opacity: 0; }
+  75% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
-.warmdown .circle-clipper {
+/**
+ * Patch the gap that appear between the two adjacent div.circle-clipper while the
+ * spinner is rotating (appears on Chrome 38, Safari 7.1, and IE 11).
+ */
+.gap-patch {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 45%;
+  width: 10%;
+  height: 100%;
+  overflow: hidden;
+  border-color: inherit;
+}
+
+.gap-patch .circle {
+  width: 1000%;
+  left: -450%;
+}
+
+.circle-clipper {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  border-color: inherit;
+}
+
+.circle-clipper .circle {
+  width: 200%;
+}
+
+.circle {
+  box-sizing: border-box;
+  height: 100%;
+  border-width: 3px; /* STROKEWIDTH */
+  border-style: solid;
+  border-color: inherit;
+  border-bottom-color: transparent !important;
+  border-radius: 50%;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.circle-clipper.left .circle {
+  border-right-color: transparent !important;
+  -webkit-transform: rotate(129deg);
+  transform: rotate(129deg);
+}
+
+.circle-clipper.right .circle {
+  left: -100%;
+  border-left-color: transparent !important;
+  -webkit-transform: rotate(-129deg);
+  transform: rotate(-129deg);
+}
+
+.active .circle-clipper.left .circle {
+  /* duration: ARCTIME */
+  -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: left-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+.active .circle-clipper.right .circle {
+  /* duration: ARCTIME */
+  -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+  animation: right-spin 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+}
+
+@-webkit-keyframes left-spin {
+  from { -webkit-transform: rotate(130deg); }
+  50% { -webkit-transform: rotate(-5deg); }
+  to { -webkit-transform: rotate(130deg); }
+}
+
+@keyframes left-spin {
+  from { transform: rotate(130deg); }
+  50% { transform: rotate(-5deg); }
+  to { transform: rotate(130deg); }
+}
+
+@-webkit-keyframes right-spin {
+  from { -webkit-transform: rotate(-130deg); }
+  50% { -webkit-transform: rotate(5deg); }
+  to { -webkit-transform: rotate(-130deg); }
+}
+
+@keyframes right-spin {
+  from { transform: rotate(-130deg); }
+  50% { transform: rotate(5deg); }
+  to { transform: rotate(-130deg); }
+}
+
+#spinnerContainer.warmdown {
   /* duration: SHRINK_TIME */
-  -webkit-animation: fade-out 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
-  animation: fade-out 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  -webkit-animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
+  animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0.0, 0.2, 1);
 }
-
 
 @-webkit-keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 @keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }

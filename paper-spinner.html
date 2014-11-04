@@ -27,19 +27,44 @@ Element providing material design circular spinner.
   <template>
     <link rel="stylesheet" href="paper-spinner.css">
 
-    <div id="container">
-      <div class="circle-container">
-        <div class="circle-clipper">
-          <div class="circle left blue" fit></div>
-          <div class="circle left red" fit></div>
-          <div class="circle left yellow" fit></div>
-          <div class="circle left green" fit></div>
-        <!-- No space between div.circle-clipper. -->
-        </div><div class="circle-clipper">
-          <div class="circle right blue" fit></div>
-          <div class="circle right red" fit></div>
-          <div class="circle right yellow" fit></div>
-          <div class="circle right green" fit></div>
+    <div id="spinnerContainer">
+      <div class="spinner-layer blue">
+        <div class="circle-clipper left">
+          <div class="circle" fit></div>
+        </div><div class="gap-patch">
+          <div class="circle" fit></div>
+        </div><div class="circle-clipper right">
+          <div class="circle" fit></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer red">
+        <div class="circle-clipper left">
+          <div class="circle" fit></div>
+        </div><div class="gap-patch">
+          <div class="circle" fit></div>
+        </div><div class="circle-clipper right">
+          <div class="circle" fit></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer yellow">
+        <div class="circle-clipper left">
+          <div class="circle" fit></div>
+        </div><div class="gap-patch">
+          <div class="circle" fit></div>
+        </div><div class="circle-clipper right">
+          <div class="circle" fit></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer green">
+        <div class="circle-clipper left">
+          <div class="circle" fit></div>
+        </div><div class="gap-patch">
+          <div class="circle" fit></div>
+        </div><div class="circle-clipper right">
+          <div class="circle" fit></div>
         </div>
       </div>
     </div>
@@ -64,14 +89,14 @@ Element providing material design circular spinner.
 
       activeChanged: function() {
         if (this.active) {
-          this.$.container.classList.add('active');
+          this.$.spinnerContainer.classList.add('active');
         } else {
-          this.$.container.classList.add('warmdown');
+          this.$.spinnerContainer.classList.add('warmdown');
         }
       },
 
       reset: function() {
-        this.$.container.classList.remove('active', 'warmdown');
+        this.$.spinnerContainer.classList.remove('active', 'warmdown');
       }
     });
   </script>
