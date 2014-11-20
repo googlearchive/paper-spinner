@@ -102,14 +102,15 @@ that it uses one color only.
 
       activeChanged: function() {
         if (this.active) {
+          this.$.spinnerContainer.classList.remove('cooldown');
           this.$.spinnerContainer.classList.add('active');
         } else {
-          this.$.spinnerContainer.classList.add('warmdown');
+          this.$.spinnerContainer.classList.add('cooldown');
         }
       },
 
       reset: function() {
-        this.$.spinnerContainer.classList.remove('active', 'warmdown');
+        this.$.spinnerContainer.classList.remove('active', 'cooldown');
       }
     });
   </script>
