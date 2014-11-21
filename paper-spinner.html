@@ -31,6 +31,8 @@ that it uses one color only.
 
 Alt attribute should be set to provide adequate context for accessibility. If not provided,
 it defaults to 'loading'.
+Empty alt can be provided to mark the element as decorative if alternative content is provided
+in another form (e.g. a text block following the spinner).
 
 ##### Example
   <paper-spinner alt="Loading contacts list" active></paper-spinner>
@@ -106,8 +108,8 @@ it defaults to 'loading'.
 
         /**
          * Alternative text content for accessibility support.
-         * If alt is present and not empty, it will add an aria-label whose content matches alt when active.
-         * If alt is not present or is empty, it will default to 'loading' as the alt value.
+         * If alt is present, it will add an aria-label whose content matches alt when active.
+         * If alt is not present, it will default to 'loading' as the alt value.
          * @attribute alt
          * @type string
          * @default 'loading'
@@ -138,6 +140,11 @@ it defaults to 'loading'.
       },
 
       altChanged: function() {
+        if (this.alt === '') {
+          this.setAttribute('aria-hidden', 'true');
+        } else {
+          this.removeAttribute('aria-hidden');
+        }
         this.setAttribute('aria-label', this.alt);
       },
 
