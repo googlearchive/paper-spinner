@@ -121,11 +121,12 @@ in another form (e.g. a text block following the spinner).
         // Allow user-provided `aria-label` take preference to any other text alternative.
         if (this.hasAttribute('aria-label')) {
           this.alt = this.getAttribute('aria-label');
+        } else {
+          this.setAttribute('aria-label', this.alt);
         }
         if (!this.active) {
           this.setAttribute('aria-hidden', 'true');
         }
-        this.setAttribute('aria-label', this.alt);
       },
 
       activeChanged: function() {
