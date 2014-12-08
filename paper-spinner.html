@@ -8,6 +8,7 @@
     subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/data.html">
 
 <!--
 Element providing material design circular spinner.
@@ -21,13 +22,11 @@ that it uses one color only.
 
 ##### Example
 
-    <style shim-shadowdom>
-      paper-spinner.blue::shadow .circle {
+    <style>
+      paper-spinner .circle {
         border-color: #4285f4;
       }
     </style>
-
-    <paper-spinner class="blue" active></paper-spinner>
 
 Alt attribute should be set to provide adequate context for accessibility. If not provided,
 it defaults to 'loading'.
@@ -39,13 +38,13 @@ in another form (e.g. a text block following the spinner).
 
 @element paper-spinner
 @blurb Element providing material design circular spinner.
-@status alpha
-@homepage http://polymerlabs.github.io/paper-spinner
+@homepage http://polymer.github.io/paper-spinner
 -->
 
-<polymer-element name="paper-spinner" attributes="active alt" role="progressbar">
+<link rel="stylesheet" href="paper-spinner.css">
+
+<!-- TODO(keanu): Code intentionally left indented to reduce diff. Fix when 0.8 is ready. -->
   <template>
-    <link rel="stylesheet" href="paper-spinner.css">
 
     <div id="spinnerContainer">
       <div class="spinner-layer blue">
@@ -92,11 +91,14 @@ in another form (e.g. a text block following the spinner).
 
   <script>
     Polymer({
-      eventDelegates: {
+      name: 'paper-spinner',
+
+      listeners: {
         'animationend': 'reset',
         'webkitAnimationEnd': 'reset'
       },
-      publish: {
+
+      published: {
         /**
          * Displays the spinner.
          *
@@ -104,7 +106,7 @@ in another form (e.g. a text block following the spinner).
          * @type boolean
          * @default false
          */
-        active: {value: false, reflect: true},
+        active: Boolean,
 
         /**
          * Alternative text content for accessibility support.
@@ -114,7 +116,12 @@ in another form (e.g. a text block following the spinner).
          * @type string
          * @default 'loading'
          */
-        alt: {value: 'loading', reflect: true}
+        alt: String
+      },
+
+      bind: {
+        active: 'activeChanged',
+        alt: 'altChanged'
       },
 
       ready: function() {
@@ -122,6 +129,7 @@ in another form (e.g. a text block following the spinner).
         if (this.hasAttribute('aria-label')) {
           this.alt = this.getAttribute('aria-label');
         } else {
+          this.alt = 'loading'
           this.setAttribute('aria-label', this.alt);
         }
         if (!this.active) {
@@ -154,4 +162,3 @@ in another form (e.g. a text block following the spinner).
       }
     });
   </script>
-</polymer-element>
