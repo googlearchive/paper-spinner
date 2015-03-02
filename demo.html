@@ -41,11 +41,13 @@
   <button>Toggle</button>
   <script>
     document.querySelector('button').addEventListener('click', function() {
+    <script>
       var spinners = document.querySelectorAll('paper-spinner');
-      Array.prototype.forEach.call(spinners, function(spinner) {
-        spinner.active = !spinner.active;
+
+      document.querySelector('button').addEventListener('click', function() {
+        Array.prototype.forEach.call(spinners, function(spinner) {
+          spinner.active = !spinner.active;
+        });
       });
-    });
-  </script>
 </body>
 </html>
