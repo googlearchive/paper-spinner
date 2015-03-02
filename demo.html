@@ -9,38 +9,41 @@
   subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-  <script src="../webcomponentsjs/webcomponents.js"></script>
-  <link rel="import" href="paper-spinner.html">
-  <style shim-shadowdom>
-  paper-spinner.blue .circle {
-    border-color: #4285f4;
-  }
 
-  paper-spinner.red .circle {
-    border-color: #db4437;
-  }
+  <head>
+    <meta charset="UTF-8">
+    <title>Paper Spinner</title>
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="paper-spinner.html">
+    <style>
 
-  paper-spinner.yellow .circle {
-    border-color: #f4b400;
-  }
+      paper-spinner.blue .circle {
+        border-color: #4285f4;
+      }
 
-  paper-spinner.green .circle {
-    border-color: #0f9d58;
-  }
-  </style>
-</head>
-<body>
-  <paper-spinner class="blue" active></paper-spinner>
-  <paper-spinner class="red" active></paper-spinner>
-  <paper-spinner class="yellow" active></paper-spinner>
-  <paper-spinner class="green" active></paper-spinner>
-  <paper-spinner active></paper-spinner>
-  <button>Toggle</button>
-  <script>
-    document.querySelector('button').addEventListener('click', function() {
+      paper-spinner.red .circle {
+        border-color: #db4437;
+      }
+
+      paper-spinner.yellow .circle {
+        border-color: #f4b400;
+      }
+
+      paper-spinner.green .circle {
+        border-color: #0f9d58;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <paper-spinner class="blue" active></paper-spinner>
+    <paper-spinner class="red" active></paper-spinner>
+    <paper-spinner class="yellow" active></paper-spinner>
+    <paper-spinner class="green" active></paper-spinner>
+    <paper-spinner active></paper-spinner>
+    <button>Toggle</button>
+
     <script>
       var spinners = document.querySelectorAll('paper-spinner');
 
@@ -49,5 +52,7 @@
           spinner.active = !spinner.active;
         });
       });
-</body>
+    </script>
+  </body>
+
 </html>
