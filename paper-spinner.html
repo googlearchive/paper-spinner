@@ -141,14 +141,6 @@ in another form (e.g. a text block following the spinner).
         alt: String
       },
 
-      /**
-       * True when the spinner is going from active to inactive. This is represented by a fade to 0%
-       * opacity to the user.
-       *
-       * @type boolean
-       */
-      coolingDown: false,
-
       bind: {
         active: 'activeChanged',
         alt: 'altChanged'
@@ -168,7 +160,13 @@ in another form (e.g. a text block following the spinner).
       configure: function() {
         return {
           active: false,
-          alt: 'loading'
+          alt: 'loading',
+
+          /**
+           * True when the spinner is going from active to inactive. This is represented by a fade
+           * to 0% opacity to the user.
+           */
+          coolingDown: false,
         };
       },
 
