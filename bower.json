@@ -1,8 +1,20 @@
 {
   "name": "paper-spinner",
   "private": true,
+  "authors": [
+    "The Polymer Authors"
+  ],
   "dependencies": {
-    "polymer": "Polymer/polymer#0.8-preview",
-    "webcomponentsjs": "Polymer/webcomponentsjs#master"
+    "layout": "Polymer/layout",
+    "polymer": "Polymer/polymer#0.8-preview"
+  },
+  "devDependencies": {
+    "webcomponentsjs": "Polymer/webcomponentsjs#master",
+    "core-component-page": "Polymer/core-component-page#~0.5.5"
+  },
+  "main": "paper-spinner.html",
+  "repo": {
+    "type": "git",
+    "url": "git://github.com/Polymer/paper-spinner.git"
   }
 }
