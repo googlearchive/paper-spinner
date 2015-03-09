@@ -153,7 +153,9 @@ in another form (e.g. a text block following the spinner).
          * True when the spinner is going from active to inactive. This is represented by a fade
          * to 0% opacity to the user.
          */
-        coolingDown: false,
+        coolingDown: {
+          value: false
+        },
 
         spinnerContainerClassName: {
           computed: 'computeSpinnerContainerClassName(active, coolingDown)'
