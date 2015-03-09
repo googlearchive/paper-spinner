@@ -119,7 +119,8 @@ in another form (e.g. a text block following the spinner).
         'webkitAnimationEnd': 'reset'
       },
 
-      published: {
+      properties: {
+
         /**
          * Displays the spinner.
          *
@@ -127,7 +128,11 @@ in another form (e.g. a text block following the spinner).
          * @type boolean
          * @default false
          */
-        active: Boolean,
+        active: {
+          observer: 'activeChanged',
+          type: Boolean,
+          value: false
+        },
 
         /**
          * Alternative text content for accessibility support.
@@ -138,19 +143,19 @@ in another form (e.g. a text block following the spinner).
          * @type string
          * @default 'loading'
          */
-        alt: String
+        alt: {
+          observer: 'altChanged',
+          type: String,
+          value: 'loading'
+        },
+
+        spinnerContainerClassName: {
+          computed: 'computeSpinnerContainerClassName(active, coolingDown)'
+        }
+
       },
 
-      bind: {
-        active: 'activeChanged',
-        alt: 'altChanged'
-      },
-
-      computed: {
-        spinnerContainerClassName: 'calcSpinnerContainerClassName(active, coolingDown)'
-      },
-
-      calcSpinnerContainerClassName: function(active, coolingDown) {
+      computeSpinnerContainerClassName: function(active, coolingDown) {
         return classNames({
           active: active || coolingDown,
           cooldown: coolingDown
