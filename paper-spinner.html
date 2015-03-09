@@ -149,6 +149,12 @@ in another form (e.g. a text block following the spinner).
           value: 'loading'
         },
 
+        /**
+         * True when the spinner is going from active to inactive. This is represented by a fade
+         * to 0% opacity to the user.
+         */
+        coolingDown: false,
+
         spinnerContainerClassName: {
           computed: 'computeSpinnerContainerClassName(active, coolingDown)'
         }
@@ -160,19 +166,6 @@ in another form (e.g. a text block following the spinner).
           active: active || coolingDown,
           cooldown: coolingDown
         });
-      },
-
-      configure: function() {
-        return {
-          active: false,
-          alt: 'loading',
-
-          /**
-           * True when the spinner is going from active to inactive. This is represented by a fade
-           * to 0% opacity to the user.
-           */
-          coolingDown: false,
-        };
       },
 
       ready: function() {
