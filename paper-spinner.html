@@ -362,7 +362,7 @@ in another form (e.g. a text block following the spinner).
 
   <template>
 
-    <div id="spinnerContainer" class-name="[[spinnerContainerClassName]]">
+    <div id="spinnerContainer" class-name="[[_spinnerContainerClassName]]">
       <div class="spinner-layer blue">
         <div class="circle-clipper left">
           <div class="circle fit"></div>
@@ -468,20 +468,20 @@ in another form (e.g. a text block following the spinner).
          * True when the spinner is going from active to inactive. This is represented by a fade
          * to 0% opacity to the user.
          */
-        coolingDown: {
+        _coolingDown: {
           value: false
         },
 
-        spinnerContainerClassName: {
-          computed: 'computeSpinnerContainerClassName(active, coolingDown)'
+        _spinnerContainerClassName: {
+          computed: 'computeSpinnerContainerClassName(active, _coolingDown)'
         }
 
       },
 
-      computeSpinnerContainerClassName: function(active, coolingDown) {
+      computeSpinnerContainerClassName: function(active, _coolingDown) {
         return classNames({
-          active: active || coolingDown,
-          cooldown: coolingDown
+          active: active || _coolingDown,
+          cooldown: _coolingDown
         });
       },
 
@@ -502,7 +502,7 @@ in another form (e.g. a text block following the spinner).
         if (this.active) {
           this.removeAttribute('aria-hidden');
         } else {
-          this.coolingDown = true;
+          this._coolingDown = true;
           this.setAttribute('aria-hidden', 'true');
         }
       },
@@ -519,7 +519,7 @@ in another form (e.g. a text block following the spinner).
 
       reset: function() {
         this.active = false;
-        this.coolingDown = false;
+        this._coolingDown = false;
       }
 
     });
