@@ -10,7 +10,9 @@
   },
   "devDependencies": {
     "webcomponentsjs": "Polymer/webcomponentsjs#master",
-    "core-component-page": "Polymer/core-component-page#~0.5.5"
+    "core-component-page": "Polymer/core-component-page#~0.5.5",
+    "web-component-tester": "~2.2.6",
+    "test-fixture": "polymer/test-fixture#~0.1.0"
   },
   "main": "paper-spinner.html",
   "repo": {
